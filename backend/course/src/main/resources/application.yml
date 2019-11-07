@@ -1,0 +1,68 @@
+
+spring:
+  profiles:
+    active: local
+---
+spring:
+  profiles: local
+  application:
+    name: sba-course
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://49.235.99.9:3306/Mentor_on_demand?useSSL=true&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+server:
+  servlet:
+    context-path: /course
+  port: 8004
+
+logging:
+ level: 
+  com:
+   sba:
+    course:
+     mapper: Debug  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+    
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"        
+      base-path: /actuator  
+    enabled-by-default: true
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+swagger.enabled: true
+   
+eureka:
+  client:
+    service-url:
+      defaultZone: http://sba-registry:10001/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"        
+      base-path: /actuator  
+    enabled-by-default: true
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+swagger.enabled: true
+

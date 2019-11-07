@@ -1,0 +1,149 @@
+spring:
+  profiles:
+    active: local
+---
+spring:
+  profiles: local
+  application:
+    name: sba-gateway
+server:
+  port: 8005
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka
+  instance:
+    securePortEnabled: true
+    instance-id: ${spring.application.name}:${server.port}
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"       
+        exclude:            
+      base-path: /actuator  
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false 
+        isolation:
+          thread:
+            timeoutInMilliseconds: 80000 
+    
+swagger.enabled: true
+
+
+apiurl:
+  gatewayurl: http://localhost:9000
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+
+  routes:        
+    sba-account:
+      path: /account/**
+      serviceId: sba-account
+      stripPrefix: false
+      sensitiveHeaders:
+    sba-auth:
+      path: /auth/**
+      serviceId: sba-auth
+      stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie # Exclude authorization from sensitive headers
+    sba-course:
+      path: /course/**
+      serviceId: sba-course
+      stripPrefix: false
+      sensitiveHeaders:
+    sba-payment:
+      path: /payment/**
+      serviceId: sba-payment
+      stripPrefix: false
+      sensitiveHeaders:
+          
+eureka:
+  client:
+    service-url:
+      defaultZone: http://sba-registry:10001/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+    
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"        
+        exclude:            
+      base-path: /actuator  
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+  
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false 
+        isolation:
+          thread:
+            timeoutInMilliseconds: 80000
+    
+swagger.enabled: true
+
+apiurl:
+  gatewayurl: http://sba-gateway:8005
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+
+  routes:
+    sba-account:
+      path: /account/**
+      serviceId: sba-account
+      stripPrefix: false
+      sensitiveHeaders:
+    sba-auth:
+      path: /auth/**
+      serviceId: sba-auth
+      stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie # Exclude authorization from sensitive headers 
+    sba-course:
+      path: /course/**
+      serviceId: sba-course
+      stripPrefix: false
+      sensitiveHeaders:
+    sba-payment:
+      path: /payment/**
+      serviceId: sba-payment
+      stripPrefix: false
+      sensitiveHeaders:
+       
+        

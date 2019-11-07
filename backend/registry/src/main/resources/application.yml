@@ -1,0 +1,66 @@
+spring:
+  profiles:
+    active: local
+---
+spring:
+  profiles: local
+  application:
+    name: sba-registry
+server:
+  port: 10001
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"        
+        exclude:            
+      base-path: /actuator  
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+
+eureka:
+  client:
+    register-with-eureka: false                                    
+    fetch-registry: false                                         
+    service-url:
+      defaultZone: http://localhost:10001/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+  environment: dev
+
+logging:
+  level:
+    com.netflix.eureka: 'OFF'
+    com.netflix.discovery: 'OFF'
+ 
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"        
+        exclude:            
+      base-path: /actuator  
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+eureka:
+  client:
+    register-with-eureka: false                                    
+    fetch-registry: false                                         
+    service-url:
+      defaultZone: http://sba-registry:10001/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+  environment: k8s
+
+logging:
+  level:
+    com.netflix.eureka: 'OFF'
+    com.netflix.discovery: 'OFF'
