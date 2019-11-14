@@ -1,5 +1,8 @@
 package com.sba.course.apicontroller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +67,36 @@ public class SbaUserCourseApi {
 			return new ResponseEntity<RspModel>(rsp, HttpStatus.INTERNAL_SERVER_ERROR);
 
 		}
+	}
+
+
+
+	@RequestMapping(value = "/updatecourse1", method = RequestMethod.GET, produces = "application/json")
+	@ApiOperation(value = "SBA User Course List")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "ok"), @ApiResponse(code = 400, message = "Bad Request"),
+			@ApiResponse(code = 401, message = "No Authroization"), @ApiResponse(code = 403, message = "No Permission"),
+			@ApiResponse(code = 404, message = "No Mentors Found"),
+			@ApiResponse(code = 500, message = "Internal Error") })
+	public ResponseEntity<RspModel> updateCourses1(@ApiParam(name = "days", required = true) @RequestParam String days,
+												   @ApiParam(name = "id", required = true) @RequestParam String id) {
+
+		int i = Integer.valueOf(days);
+		Date enabelTime = getFetureDate(i);
+		usercoursemapper.updateCourse(enabelTime, Integer.valueOf(id));
+
+		RspModel rsp = new RspModel();
+		rsp.setCode(200);
+		rsp.setMessage("Found Courses");
+		return new ResponseEntity<RspModel>(rsp, HttpStatus.OK);
+	}
+
+	public static Date getFetureDate(int past) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) + past);
+		Date today = calendar.getTime();
+
+
+		return today;
 	}
 
 

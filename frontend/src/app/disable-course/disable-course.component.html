@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Disable Course</h2>
+
+
+<mat-dialog-content [formGroup]="form">
+
+    <mat-grid-list cols="2" rowHeight="60px">
+
+
+            <input formControlName="days" type="hidden">
+        <mat-grid-tile>
+    <mat-form-field style="width: 205px;">
+
+        <input matInput
+                placeholder="days"
+               formControlName="days">
+
+    </mat-form-field>
+    </mat-grid-tile>
+
+
+
+
+
+  </mat-grid-list>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+    <button mat-button mat-dialog-close
+            (click)="close()">
+        Cancel
+    </button>
+
+    <button [disabled]="loading" [disabled]="!form.valid" mat-button cdkFocusInitial
+            (click)="save()">
+        Save
+    </button>
+
+</mat-dialog-actions>

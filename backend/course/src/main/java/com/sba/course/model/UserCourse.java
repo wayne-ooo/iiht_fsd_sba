@@ -12,6 +12,10 @@ public class UserCourse {
 	private Date endDate;
 	private String mentorName;
 	private String progress;
+	private Date enabelTime;
+	private String status;
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -60,7 +64,21 @@ public class UserCourse {
 	public void setProgress(String progress) {
 		this.progress = progress;
 	}
-	
-	
+
+	public Date getEnabelTime() {
+		return enabelTime;
+	}
+
+	public void setEnabelTime(Date enabelTime) {
+		this.enabelTime = enabelTime;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 }

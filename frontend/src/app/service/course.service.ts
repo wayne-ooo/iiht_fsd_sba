@@ -15,6 +15,9 @@ export class CourseService {
     return this.http.post(`${environment.gatewayurl}/course/api/v1/addcourse`, course);
   }
 
+  updateCourse(id: string, days: string) {
+        return this.http.get(`${environment.gatewayurl}/course/api/v1/user/updatecourse1?id=${id}&days=${days}`);
+    }
 
   addRate(rate: NewRate) {
     return this.http.post(`${environment.gatewayurl}/course/api/v1/addrate`, rate);

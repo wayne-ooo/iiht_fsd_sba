@@ -24,6 +24,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { AddCourseComponent } from './add-course/add-course.component';
+import { DisableCourseComponent } from './disable-course/disable-course.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { CourseListComponent } from './course-list/course-list.component';
@@ -45,7 +46,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     AlertComponent,
     AddCourseComponent,
     CourseListComponent,
-    UserListComponent
+    UserListComponent,
+      DisableCourseComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +77,6 @@ import {MatBadgeModule} from '@angular/material/badge';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
   bootstrap: [AppComponent],
-  entryComponents: [AddCourseComponent]
+  entryComponents: [DisableCourseComponent,AddCourseComponent]
 })
 export class AppModule { }

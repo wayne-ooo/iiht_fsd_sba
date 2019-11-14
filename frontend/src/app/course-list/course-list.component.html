@@ -12,11 +12,14 @@
                     <mat-card-title><span class="label">Skill: </span>{{course.skill}}</mat-card-title>
                     <mat-card-subtitle><span class="label">Course Name: </span>{{ course.name }}</mat-card-subtitle>
                     <span class="mat-header-spacer"></span>
-                    <div *ngIf="userRole === 'user'">
-                        <button mat-icon-button color="primary">
-                            <mat-icon style="font-size: 40px">add</mat-icon>
+                    <div *ngIf="currentUser && currentUser.role === 'mentor'">
+
+                        <button  mat-icon-button (click)="disCourseDialog(course.id)">
+                            <mat-icon style="font-size: 40px">flash_off</mat-icon>
                         </button>
+
                     </div>
+
                 </mat-card-header>
                 <mat-card-content>
                     <mat-grid-list cols="2" rows="3" rowHeight="30px">

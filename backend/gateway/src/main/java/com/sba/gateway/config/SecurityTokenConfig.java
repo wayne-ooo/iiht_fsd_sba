@@ -48,6 +48,7 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
 		   .antMatchers(HttpMethod.GET, "/course/api/v1/mentor/list").permitAll()
 //		   .antMatchers(HttpMethod.GET, "/account/api/v1/query").permitAll()
 		   .antMatchers(HttpMethod.GET, "/course/api/v1/mentor/book").hasRole("user")
+				   .antMatchers(HttpMethod.GET, "/course/api/v1/user/updatecourse").hasAnyRole("user","mentor")
 		   .antMatchers(HttpMethod.GET, "/course/api/v1/user/list").hasRole("user")
 		   .antMatchers(HttpMethod.GET, "/course/api/v1/mentor/searchcourse").hasRole("user")
 		   // must be an admin if trying to access admin area (authentication is also required here)

@@ -21,4 +21,7 @@ public interface MentorMapper {
 	@Update("update course set userName=#{username},progress=1 where id = #{id}")
 	void bookCourse(@Param("username") String username, @Param("id") Integer id);
 
+	@Update("update course set status=#{status} where id = #{id}")
+	void updateCourse(@Param("status") String status, @Param("id") Integer id);
+
 }
